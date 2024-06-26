@@ -1,8 +1,8 @@
-// LocationDropdown.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './stylesheet/LocationDropDown.css';
 
-const LocationDropDown = ({onLocationSelect}) => {
+const LocationDropDown = ({ onLocationSelect }) => {
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -15,7 +15,7 @@ const LocationDropDown = ({onLocationSelect}) => {
     const fetchCountries = async () => {
       const url = 'https://www.ncei.noaa.gov/cdo-web/api/v2/locations';
       const params = {
-        locationcategoryid: 'CNTRY', // Category ID for countries
+        locationcategoryid: 'CNTRY',
         sortfield: 'name',
         sortorder: 'asc',
         limit: 1000
@@ -26,7 +26,6 @@ const LocationDropDown = ({onLocationSelect}) => {
           headers: { token: apiToken },
           params
         });
-        console.log(response.data)
         setCountries(response.data.results);
       } catch (err) {
         setError('Error fetching countries');
@@ -38,9 +37,6 @@ const LocationDropDown = ({onLocationSelect}) => {
 
   const handleCountryChange = async (e) => {
     const countryId = e.target.value;
-    
-    console.log(countryId.split(":")[1])
-    
     setSelectedCountry(countryId);
     setSelectedCity('');
     setCities([]);
@@ -51,7 +47,7 @@ const LocationDropDown = ({onLocationSelect}) => {
       sortfield: 'name',
       sortorder: 'asc',
       limit: 1000,
-      datacategoryid: countryId // Filter by selected country
+      datacategoryid: countryId
     };
 
     try {
@@ -59,9 +55,11 @@ const LocationDropDown = ({onLocationSelect}) => {
         headers: { token: apiToken },
         params
       });
-      
-      const filteredCities = response.data.results.filter((city)=>(city.name.split(",")[1].includes(countryId.split(":")[1])))
-  
+
+      const filteredCities = response.data.results.filter((city) =>
+        city.name.split(",")[1].includes(countryId.split(":")[1])
+      );
+
       setCities(filteredCities);
     } catch (err) {
       setError('Error fetching cities');
@@ -70,15 +68,14 @@ const LocationDropDown = ({onLocationSelect}) => {
 
   const handleCityChange = (e) => {
     const cityId = e.target.value;
-    console.log(cityId)
     setSelectedCity(cityId);
     onLocationSelect(cityId);
   };
 
   return (
-    <div>
-      {error && <p>{error}</p>}
-      <div>
+    <div className="location-dropdown-container">
+      {error && <p className="error-message">{error}</p>}
+      <div className="input-container">
         <label htmlFor="country">Select Country:</label>
         <select id="country" value={selectedCountry} onChange={handleCountryChange}>
           <option value="">--Select Country--</option>
@@ -89,19 +86,26 @@ const LocationDropDown = ({onLocationSelect}) => {
           ))}
         </select>
       </div>
-      {selectedCountry && (
-        <div>
-          <label htmlFor="city">Select City:</label>
+      {
+        selectedCountry ? 
+        <div className='input-container'>
+          <label className='label' htmlFor="city">Select City:</label>
           <select id="city" value={selectedCity} onChange={handleCityChange}>
-            <option value="">--Select City--</option>
+            <option className='optiontext' value="">Select City</option>
             {cities.map((city) => (
               <option key={city.id} value={city.id}>
                 {city.name}
               </option>
             ))}
           </select>
+        </div> : 
+        <div className='input-container'>
+          <label htmlFor="city">Select City:</label>
+          <select id="city" value={selectedCity} onChange={handleCityChange}>
+            <option value="">Select Country First</option>
+          </select>
         </div>
-      )}
+      }
     </div>
   );
 };

@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import LocationDropDown from './LocationDropDown';
+import './stylesheet/TemperatureData.css';
 
 const TemperatureData = () => {
   const [locationId, setLocationId] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [avgdata, setAvgData] = useState([])
+  const [avgdata, setAvgData] = useState([]);
   const [error, setError] = useState('');
-  const  [data,setData] = useState([])
+  const [data, setData] = useState([]);
 
-  const apiToken = 'YiOwuvLZwnXFInhsGizSMRFfNhsRrzdl'; // Replace with your actual API key
+  const apiToken = 'YiOwuvLZwnXFInhsGizSMRFfNhsRrzdl';
 
   const fetchData = async (datatypeid) => {
     const url = 'https://www.ncei.noaa.gov/cdo-web/api/v2/data';
@@ -33,7 +34,7 @@ const TemperatureData = () => {
       });
       return response.data.results;
     } catch (err) {
-      throw new Error('Error fetching data',);
+      throw new Error('Error fetching data');
     }
   };
 
@@ -47,13 +48,14 @@ const TemperatureData = () => {
 
     try {
       const avgData = await fetchData('TAVG');
-      console.log("Average temperature data for given interval : ",avgData)
+      console.log(avgData)
       const minData = await fetchData('TMIN');
-      console.log("Minimum temperature data for given interval : ",minData)
+      console.log(minData)
       const maxData = await fetchData('TMAX');
-      console.log("Maximum temperature data for given interval : ",maxData)
+      console.log(maxData)
 
-      setAvgData(avgData)
+      setAvgData(avgData);
+      setData([...minData, ...maxData]);
 
     } catch (err) {
       setError(err.message);
@@ -61,41 +63,39 @@ const TemperatureData = () => {
   };
 
   return (
-    <div>
+    <div className="temperature-data-container">
       <h1>Fetch Temperature Data</h1>
-      <LocationDropDown onLocationSelect={setLocationId} />
-      <div>
-        <label>
-          Start Date:
+      <div className="formbody">
+        <LocationDropDown onLocationSelect={setLocationId} />
+        <div className="input-group">
+          <label>
+            Start Date:
+          </label>
           <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          End Date:
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-        </label>
-      </div>
-      <button onClick={handleFetchData}>Fetch Data</button>
-      {error && <p>{error}</p>}
-      {data && (
-        <div>
-          <h2>Temperature Data</h2>
-          {
-            <div>
-              {avgdata.length>0 && <p>AVG data processed</p>}
-            </div>
-          }
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
         </div>
-      )}
+        <div className="input-group">
+          <label>
+            End Date:
+          </label>
+          <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+        </div>
+        <button onClick={handleFetchData}>Fetch Data</button>
+        {/* {error && <p className="error-message">{error}</p>}
+        {data && (
+          <div className="temperature-results">
+            <h2>Temperature Data</h2>
+            {avgdata.length > 0 && <p>AVG data processed</p>}
+          </div>
+        )} */}
+      </div>
     </div>
   );
 };
