@@ -3,14 +3,14 @@
     width: 100%;
     font-family: 'Arial', sans-serif;
     text-align: center;
-    background: rgb(15, 15, 15);
+    background: #0f0f0f;
     border-radius: 30px;
     padding-top: 15px;
     padding-bottom: 40px;
   }
   
   .temperature-data-container h1 {
-    color: #4CAF50;
+    color: rgb(16, 238, 16);
     font-size: 28px;
     margin-bottom: 40px;
   }
@@ -31,7 +31,7 @@
   .input-group label {
     margin-bottom: 5px;
     color: #f6f2f2;
-    font-weight: bold;
+    font-weight: 500;
   }
   
   .input-group input {
@@ -44,7 +44,7 @@
   
   .temperature-data-container button {
     padding: 14px 26px;
-    background-color: #4CAF50;
+    background-color: rgb(18, 195, 18);
     color: white;
     border: none;
     border-radius: 30px;
@@ -53,7 +53,7 @@
   }
   
   .temperature-data-container button:hover {
-    background-color: #447246;
+    background-color: #006a05;
   }
   
   .temperature-results {

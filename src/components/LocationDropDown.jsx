@@ -78,7 +78,7 @@ const LocationDropDown = ({ onLocationSelect }) => {
       <div className="input-container">
         <label htmlFor="country">Select Country:</label>
         <select id="country" value={selectedCountry} onChange={handleCountryChange}>
-          <option value="">--Select Country--</option>
+          <option value="">Select Country</option>
           {countries.map((country) => (
             <option key={country.id} value={country.id}>
               {country.name}

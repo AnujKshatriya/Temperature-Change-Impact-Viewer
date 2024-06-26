@@ -16,7 +16,7 @@
 .input-container label {
   margin-bottom: 5px;
   color: #f3efef;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .input-container select {
