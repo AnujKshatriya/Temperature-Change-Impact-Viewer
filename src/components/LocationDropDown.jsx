@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './stylesheet/LocationDropDown.css';
 
-const LocationDropDown = ({ onLocationSelect }) => {
+const LocationDropDown = ({ onLocationSelect, setError }) => {
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
-  const [error, setError] = useState('');
 
   const apiToken = 'YiOwuvLZwnXFInhsGizSMRFfNhsRrzdl';
 
@@ -28,7 +27,8 @@ const LocationDropDown = ({ onLocationSelect }) => {
         });
         setCountries(response.data.results);
       } catch (err) {
-        setError('Error fetching countries');
+        console.log(err)
+        setError('Error fetching countries, Please reload site');
       }
     };
 
@@ -62,7 +62,8 @@ const LocationDropDown = ({ onLocationSelect }) => {
 
       setCities(filteredCities);
     } catch (err) {
-      setError('Error fetching cities');
+      console.log("cities error ", err)
+      setError('Error fetching cities, Please reload site');
     }
   };
 
@@ -74,7 +75,6 @@ const LocationDropDown = ({ onLocationSelect }) => {
 
   return (
     <div className="location-dropdown-container">
-      {error && <p className="error-message">{error}</p>}
       <div className="input-container">
         <label htmlFor="country">Select Country:</label>
         <select id="country" value={selectedCountry} onChange={handleCountryChange}>

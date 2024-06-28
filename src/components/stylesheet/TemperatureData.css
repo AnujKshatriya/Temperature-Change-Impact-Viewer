@@ -1,7 +1,10 @@
-/* TemperatureData.css */
+.TemperatureData-main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .temperature-data-container {
     width: 100%;
-    font-family: 'Arial', sans-serif;
     text-align: center;
     background: #0f0f0f;
     border-radius: 30px;
@@ -63,6 +66,18 @@
   .error-message {
     color: red;
     margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .graphDisplay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0f0f;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   @media (max-width:450px) {

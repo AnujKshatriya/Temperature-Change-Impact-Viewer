@@ -4,12 +4,14 @@
 
 .header .navbar{
     height: 100px;
-    box-shadow: 0 1px 15px 0 rgb(18, 195, 18);
+    /* background: #0f0f0f; */
+    box-shadow: 0 1px 15px 0  #24ff03;
     padding: 0 120px;
     display: flex;
     align-items: center;
     gap: 5px;
     margin-bottom: 50px;
+    /* border-bottom: 5px solid #0f0f0f; */
 }
 
 .navbar img{
@@ -22,7 +24,7 @@
 .navbar h3{
     font-size: 25px;
     font-weight: 600;
-    background: linear-gradient(to top, rgb(209, 255, 3) , rgb(18, 195, 18));
+    background: linear-gradient(to top, rgb(205, 251, 0) , rgb(18, 195, 18));
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -33,13 +35,13 @@
 }
 .hero h1{
     margin-bottom: 20px;
+    text-align: center;
 }
 .autotext{
-    color: rgb(25, 225, 25);
+    color: rgb(252, 252, 252);
 }
 .hero .paragraph{
     color: rgb(135, 135, 135);
-    padding-right: 10vw;
     font-size: 14px;
     font-weight: 300;
     display: flex;
@@ -54,4 +56,46 @@
 }
 .paragraph :nth-child(2) span{
     color: rgb(18, 195, 18);
+}
+
+@media (max-width:700px) {
+    .header .navbar{
+        padding: 0 20px;
+        justify-content: center;
+    }
+    .navbar img{
+        width: 15vw;
+        height: 15vw;
+    }
+    .navbar h3{
+        font-size: 3.5vw;
+        white-space: nowrap;
+    }
+    .header .hero{
+        padding: 0 20px;
+    }
+    .hero h1{
+        font-size: 4.5vw;
+    }
+    .hero p{
+        font-size: 2vw;
+    }
+    .hero .paragraph :nth-child(2){
+        font-size: 2.3vw;
+    }
+}
+
+@media (max-width:500px) {
+    .header .hero{
+        padding: 0 20px;
+    }
+    .hero h1{
+        font-size: 5.5vw;
+    }
+    .hero p{
+        font-size: 2.5vw;
+    }
+    .hero .paragraph :nth-child(2){
+        font-size: 2.9vw;
+    }
 }

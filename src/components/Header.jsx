@@ -11,13 +11,13 @@ const Header = () => {
   return (
     <div className='header'>
         <div className="navbar">
-            <img src="public/earth.jpg" alt="" />
+            <img src="/earth.jpg" alt="" />
             <h3>Temperature Change Impact Viewer</h3>
         </div>
         <div className="hero">
             <h1>
                 <span className='autotext'>{text}</span>
-                <span><Cursor/></span>
+                <span style={{color:" rgb(18, 195, 18)"}}><Cursor/></span>
             </h1>
             <div className="paragraph">
                 <p>Welcome to the Temperature Change Impact Viewer! Our cutting-edge platform harnesses data from the National Centers for Environmental Information (NCEI) to provide you with a comprehensive analysis of temperature changes across the globe. Simply input your desired time interval, country, and city name, and our intuitive interface will present the data in visually engaging formats.</p>
